@@ -1,0 +1,7 @@
+# Configuration for keymap-drawer (https://github.com/caksoylar/keymap-drawer)
+parse_config:
+  raw_binding_map:
+    "&caps_word": CAPS
+    "&studio_unlock": STUDIO
+    "&bootloader": BOOT
+    "&sys_reset": RESET
