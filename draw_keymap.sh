@@ -6,12 +6,25 @@ cd "$(dirname "$0")"
 
 KEYMAP=config/sofle_choc_pro.keymap
 LAYOUT=boards/arm/sofle_choc_pro/sofle_choc_pro-layouts.dtsi
-KD=(uvx --from keymap-drawer keymap -c keymap_drawer.config.yaml)
+
+# Inlined config for keymap-drawer
+CONFIG_FILE=$(mktemp --suffix=.yaml)
+trap 'rm -f "$CONFIG_FILE"' EXIT
+cat << 'CFG' > "$CONFIG_FILE"
+parse_config:
+  raw_binding_map:
+    "&caps_word": CAPS
+    "&studio_unlock": STUDIO
+    "&bootloader": BOOT
+    "&sys_reset": RESET
+CFG
+
+KD=(uvx --from keymap-drawer keymap -c "$CONFIG_FILE")
 
 mkdir -p img
 "${KD[@]}" parse -z "$KEYMAP" -o img/keymap.yaml
 
-# Extract layer names dynamically from the parsed YAML using python
+# Extract layer names dynamically from the parsed YAML
 LAYERS=$(python3 -c "import yaml; data = yaml.safe_load(open('img/keymap.yaml')); print(' '.join(data.get('layers', {}).keys()))")
 
 draw() {
