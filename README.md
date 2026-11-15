@@ -13,7 +13,6 @@ Dieses Repository enthält die ZMK-Firmware-Konfiguration für die **Sofle Choc 
    - [Drehregler (Rotary Encoders)](#4-drehregler-rotary-encoders)
    - [Bluetooth: Kopplung & Profilverwaltung](#5-bluetooth-kopplung--profilverwaltung)
    - [RGB-Beleuchtung & Stromspar-Tipps](#6-rgb-beleuchtung--stromspar-tipps)
-   - [ZMK Studio (Live Keymap Editor)](#7-zmk-studio-live-keymap-editor)
 2. [Tasten-Lexikon & Abkürzungsverzeichnis](#-tasten-lexikon--abkürzungsverzeichnis)
    - [Bluetooth & System](#bluetooth--system)
    - [Stromversorgung & RGB-Beleuchtung](#stromversorgung--rgb-beleuchtung)
@@ -65,7 +64,6 @@ graph TD
    - **Bluetooth-Steuerung** (`BT1`–`BT5`, `BTCLR`).
    - **Navigations-Cluster** (Pfeiltasten `←` `↓` `↑` `→`, `PgUp`, `PgDn`, `Del`, `Backspace`).
    - **Zwischenablage & Bearbeiten** (`Undo`, `Cut`, `Copy`, `Paste`, `Caps Lock`, `Print Screen`).
-   - **ZMK Studio Freischaltung** (`STUDIO`).
 4. **Layer 3 (`adjust` / Tri-Layer):** Aktiviert sich automatisch, wenn Sie **`LOWER` und `RAISE` gleichzeitig gedrückt halten**.
    - Steuerung der RGB-Underglow-Beleuchtung (Farbe, Sättigung, Helligkeit, Effekte).
    - `EXTPWR` (Abschalten der Stromversorgung für maximale Akkulaufzeit).
@@ -131,15 +129,6 @@ Die Beleuchtung wird über die **`ADJUST`**-Ebene gesteuert (halten Sie **`LOWER
 
 ---
 
-### 7. ZMK Studio (Live Keymap Editor)
-
-Diese Firmware unterstützt **ZMK Studio**, womit Sie Tasten direkt im Browser oder in der ZMK Studio App ohne Neu-Flashen anpassen können:
-1. Verbinden Sie die linke Hälfte per USB-Kabel mit dem PC.
-2. Halten Sie **`RAISE`** gedrückt und drücken Sie die Taste **`STUDIO`** (untere linke Reihe, neben Paste).
-3. Öffnen Sie [ZMK Studio](https://zmk.dev/) im Chrome/Edge-Browser und verbinden Sie sich per WebHID.
-
----
-
 ## 🔍 Tasten-Lexikon & Abkürzungsverzeichnis
 
 Hier finden Sie eine verständliche Erklärung aller nicht selbsterklärenden Tastenabkürzungen:
@@ -150,7 +139,6 @@ Hier finden Sie eine verständliche Erklärung aller nicht selbsterklärenden Ta
 | :--- | :--- | :--- |
 | **`BT1` – `BT5`** | `&bt BT_SEL 0..4` | Wählt Bluetooth-Profil 1 bis 5 aus (für 5 verschiedene Geräte). |
 | **`BTCLR`** | `&bt BT_CLR` | Löscht die Bluetooth-Kopplungsdaten des aktuell ausgewählten Profils. |
-| **`STUDIO` / `STUD`** | `&studio_unlock` | Entsperrt ZMK Studio für Live-Tastenbelegungsänderungen via USB. |
 | **`BOOT`** | `&bootloader` | Versetzt den Controller in den Bootloader-Modus zum Flashen neuer Firmware. |
 | **`RESET`** | `&sys_reset` | Führt einen Software-Neustart der Tastatur durch. |
 
@@ -213,7 +201,7 @@ Hier finden Sie eine verständliche Erklärung aller nicht selbsterklärenden Ta
 #### 2. Lower Layer (F-Tasten & Sonderzeichen)
 ![Lower Layer](img/keymap-lower.png)
 
-#### 3. Raise Layer (Navigation, Bluetooth & Studio)
+#### 3. Raise Layer (Navigation & Bluetooth)
 ![Raise Layer](img/keymap-raise.png)
 
 #### 4. Adjust Layer (RGB-Licht & Power-Management)
