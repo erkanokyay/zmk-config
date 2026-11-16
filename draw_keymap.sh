@@ -12,9 +12,12 @@ CONFIG_FILE=$(mktemp --suffix=.yaml)
 trap 'rm -f "$CONFIG_FILE"' EXIT
 cat << 'CFG' > "$CONFIG_FILE"
 parse_config:
+  # Legends name the modifier roles, not the key codes. README.md explains the roles.
   raw_binding_map:
-    "&caps_word": CAPS
-    "&studio_unlock": STUDIO
+    "&hm LC(LA(LGUI)) ESCAPE": {t: ESC, h: WM}
+    "&kp RGUI": APP
+    "&kp RCTRL": CTRL
+    "&kp RALT": ALT
     "&bootloader": BOOT
     "&sys_reset": RESET
 CFG

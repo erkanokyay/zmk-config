@@ -12,7 +12,7 @@ layers:
   - '8'
   - '9'
   - '0'
-  - '`'
+  - '-'
   - TAB
   - Q
   - W
@@ -25,7 +25,7 @@ layers:
   - O
   - P
   - BSPC
-  - {t: ESCAPE, h: LEFT GUI}
+  - {t: ESC, h: WM}
   - A
   - S
   - D
@@ -51,16 +51,16 @@ layers:
   - .
   - /
   - RSHFT
-  - LGUI
-  - LALT
-  - LCTRL
+  - ALT
+  - CTRL
+  - APP
   - lower
   - SPACE
   - ENTER
   - raise
-  - RCTRL
-  - RALT
-  - RGUI
+  - APP
+  - CTRL
+  - ALT
   lower:
   - {t: ▽, type: trans}
   - F1
@@ -98,7 +98,7 @@ layers:
   - (
   - )
   - '|'
-  - {t: ▽, type: trans}
+  - LSHIFT
   - '='
   - '-'
   - +
@@ -111,7 +111,7 @@ layers:
   - ;
   - ':'
   - \
-  - {t: ▽, type: trans}
+  - RSHFT
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -123,7 +123,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   raise:
-  - BT CLR
+  - {t: ▽, type: trans}
   - {t: BT, h: '0'}
   - {t: BT, h: '1'}
   - {t: BT, h: '2'}
@@ -141,17 +141,17 @@ layers:
   - CMENU
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
+  - HOME
+  - PG DN
+  - PG UP
+  - END
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - LALT
-  - LCTRL
+  - ALT
+  - CTRL
   - LSHFT
-  - {t: ▽, type: trans}
+  - APP
   - CLCK
   - LEFT
   - DOWN
@@ -160,11 +160,11 @@ layers:
   - DEL
   - BSPC
   - {t: ▽, type: trans}
-  - UNDO
-  - CUT
-  - COPY
-  - PASTE
-  - STUDIO
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -221,8 +221,8 @@ layers:
   - ''
   - ''
   - ''
-  - ''
-  - ''
+  - BOOT
+  - RESET
   - ''
   - ''
   - ''
@@ -231,8 +231,8 @@ layers:
   - ''
   - ''
   - ''
-  - ''
-  - ''
+  - RESET
+  - BOOT
   - ''
   - ''
   - ''

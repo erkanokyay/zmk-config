@@ -2,6 +2,8 @@
 
 Dieses Repository enthält die ZMK-Firmware-Konfiguration für die **Sofle Choc Pro** (eine ergonomische, geteilte Low-Profile-Tastatur mit Drehreglern und RGB-Underglow).
 
+Die Belegung ist für identische Tasten auf Omarchy (Linux) und macOS gebaut. [`docs/tastenplan.html`](docs/tastenplan.html) erklärt das Konzept mit allen Ebenen und Hotkeys. Öffne die Datei lokal im Browser.
+
 ---
 
 ## 📑 Inhaltsverzeichnis
@@ -33,7 +35,7 @@ Dieses Repository enthält die ZMK-Firmware-Konfiguration für die **Sofle Choc 
 Die **Sofle Choc Pro** besteht aus zwei separaten Hälften (Links und Rechts), die für eine natürliche, schulterbreite Handhaltung sorgen.
 - **Linke Hälfte (Master / Central):** Die linke Seite übernimmt die Hauptverbindung zu Ihrem Computer (entweder über USB-C oder drahtlos per Bluetooth).
 - **Rechte Hälfte (Peripheral):** Die rechte Seite kommuniziert kabellos via Bluetooth Low Energy (BLE) mit der linken Hälfte.
-- **Daumentasten (Thumb Cluster):** Die Daumen übernehmen wichtige Funktionen wie `Space`, `Enter`, Modifikatoren (`Ctrl`, `Alt`, `GUI`) und das Umschalten der Ebenen (`LOWER`, `RAISE`).
+- **Daumentasten (Thumb Cluster):** Die Daumen übernehmen wichtige Funktionen wie `Space`, `Enter`, Modifikatoren (`ALT`, `CTRL`, `APP`) und das Umschalten der Ebenen (`LOWER`, `RAISE`).
 
 > [!NOTE]
 > Wenn Sie die Tastatur per USB nutzen, verbinden Sie stets die **linke Hälfte** mit Ihrem PC.
@@ -61,21 +63,31 @@ graph TD
    - Zugriff auf **F1 bis F12**.
    - Alle Programmier- und Sonderzeichen (`!`, `@`, `#`, `$`, `%`, `{`, `}`, `[`, `]`, `\`, `|`, etc.).
 3. **Layer 2 (`raise`):** Wird aktiviert, indem Sie die Daumentaste **`RAISE` gedrückt halten**.
-   - **Bluetooth-Steuerung** (`BT1`–`BT5`, `BTCLR`).
-   - **Navigations-Cluster** (Pfeiltasten `←` `↓` `↑` `→`, `PgUp`, `PgDn`, `Del`, `Backspace`).
-   - **Zwischenablage & Bearbeiten** (`Undo`, `Cut`, `Copy`, `Paste`, `Caps Lock`, `Print Screen`).
+   - **Bluetooth-Profile** (`BT1`–`BT5`).
+   - **Navigation:** Pfeile auf `H J K L`, darüber `Home`, `PgDn`, `PgUp`, `End`. Dazu `Del` und `Backspace`.
+   - **Modifikatoren für die linke Hand** auf `A S D F`: `ALT`, `CTRL`, `Shift`, `APP`.
+   - `Caps Lock`, `Print Screen`, `Insert` und die Kontextmenü-Taste.
 4. **Layer 3 (`adjust` / Tri-Layer):** Aktiviert sich automatisch, wenn Sie **`LOWER` und `RAISE` gleichzeitig gedrückt halten**.
    - Steuerung der RGB-Underglow-Beleuchtung (Farbe, Sättigung, Helligkeit, Effekte).
    - `EXTPWR` (Abschalten der Stromversorgung für maximale Akkulaufzeit).
+   - `BTCLR`, `BOOT` und `RESET`.
 
 ---
 
-### 3. Dual-Funktionstasten (Mod-Tap / Hold-Tap)
+### 3. Modifikator-Rollen
 
-Einige Tasten verhalten sich je nach Anschlagsart unterschiedlich:
-- **`ESC / GUI` (oben links in der Home-Reihe, neben `A`):**
-  - **Kurz antippen (Tap):** Sendet die **`Escape` (ESC)** Taste.
-  - **Gedrückt halten (Hold):** Wirkt als **`GUI`** (Windows-Taste unter Windows, Command `⌘` auf dem Mac, Super-Taste unter Linux).
+Jede Modifikator-Rolle sendet einen eigenen Tastencode. Jedes Betriebssystem ordnet die Rollen selbst zu. So brauchen weder Linux noch macOS ein Remapping-Programm für diese Tastatur.
+
+| Rolle | Taste | Tastatur sendet | Linux (Omarchy) | macOS |
+| :--- | :--- | :--- | :--- | :--- |
+| **`WM`** | Caps-Position halten. Antippen sendet `ESC`. | `LCTRL+LALT+LGUI` | Super | Ctrl+Opt+Cmd (AeroSpace) |
+| **`APP`** | Daumen, neben `LOWER` / `RAISE` | `RGUI` | Control | Cmd |
+| **`CTRL`** | Daumen, eine Taste weiter außen | `RCTRL` | Control | Control |
+| **`ALT`** | Daumen, ganz außen | `RALT` | Alt | Option |
+
+Keine andere Taste sendet `LCTRL`, `LALT` oder `LGUI`. Diese Codes gehören zur `WM`-Taste.
+
+Auf Linux macht die XKB-Option `sofle:mods` aus dem Repository `development-configurations` die Zuordnung. Ohne diese Option verhält sich die Tastatur dort falsch.
 
 ---
 
@@ -109,7 +121,7 @@ Die Tastatur kann mit bis zu **5 verschiedenen Geräten** (PC, Laptop, Tablet, S
 - Halten Sie `RAISE` gedrückt und tippen Sie das gewünschte Profil (`BT1` bis `BT5`) an. Die Tastatur verbindet sich sofort mit dem jeweiligen Gerät.
 
 #### Verbindungsprobleme beheben (Profil zurücksetzen):
-- Halten Sie `RAISE` gedrückt und tippen Sie auf **`BTCLR`**. Dadurch wird die Kopplung des aktuell aktiven Profils gelöscht und kann neu eingerichtet werden.
+- Halten Sie `LOWER` + `RAISE` gedrückt und tippen Sie auf **`BTCLR`** (oben links). Dadurch wird die Kopplung des aktuell aktiven Profils gelöscht und kann neu eingerichtet werden.
 
 ---
 
@@ -157,7 +169,8 @@ Hier finden Sie eine verständliche Erklärung aller nicht selbsterklärenden Ta
 
 | Tastenbeschriftung | ZMK-Binding | Erklärung |
 | :--- | :--- | :--- |
-| **`LEFT` / `DOWN` / `UP` / `RIGHT`** | `&kp LEFT/DOWN/UP/RIGHT` | Pfeiltasten zur Cursor-Navigation (auf der rechten Hand unter den Fingern `J`, `K`, `I`, `L`). |
+| **`LEFT` / `DOWN` / `UP` / `RIGHT`** | `&kp LEFT/DOWN/UP/RIGHT` | Pfeiltasten zur Cursor-Navigation (auf `RAISE` unter `H`, `J`, `K`, `L`). |
+| **`HOME` / `END`** | `&kp HOME` / `&kp END` | Zeilenanfang / Zeilenende (auf `RAISE` über `H` und `L`). |
 | **`PGUP` / `PGDN`** | `&kp PG_UP` / `&kp PG_DN` | **Bild auf** / **Bild ab** (seitenweises Scrollen). |
 | **`INS`** | `&kp INS` | **Einfügen**-Taste (Insert). |
 | **`DEL`** | `&kp DEL` | **Entfernen**-Taste (löscht Zeichen rechts vom Cursor). |
@@ -165,10 +178,6 @@ Hier finden Sie eine verständliche Erklärung aller nicht selbsterklärenden Ta
 | **`PSCR` / `PSCRN`** | `&kp PSCRN` | **Drucken / Screenshot** (Print Screen). |
 | **`CMENU`** | `&kp K_CMENU` | **Kontextmenü-Taste** (entspricht einem Rechtsklick an der Cursor-Position). |
 | **`CLCK`** | `&kp CLCK` | **Caps Lock** (Dauerhafte Großschreibung feststellen). |
-| **`UNDO`** | `&kp K_UNDO` | **Rückgängig machen** (entspricht Strg + Z). |
-| **`CUT`** | `&kp K_CUT` | **Ausschneiden** in die Zwischenablage (entspricht Strg + X). |
-| **`COPY`** | `&kp K_COPY` | **Kopieren** in die Zwischenablage (entspricht Strg + C). |
-| **`PASTE`** | `&kp K_PASTE` | **Einfügen** aus der Zwischenablage (entspricht Strg + V). |
 | **`MUTE`** | `&kp C_MUTE` | Ton stummschalten / Lautstärke ein. |
 | **`PLAY`** | `&kp C_PLAY` | Medienwiedergabe starten oder pausieren. |
 
@@ -176,11 +185,13 @@ Hier finden Sie eine verständliche Erklärung aller nicht selbsterklärenden Ta
 
 | Tastenbeschriftung | ZMK-Binding | Erklärung |
 | :--- | :--- | :--- |
-| **`GUI` / `LGUI` / `RGUI`** | `&kp LGUI` / `RGUI` | **Windows-Taste** / **Command `⌘`** (Mac) / **Super** (Linux). |
-| **`ALT` / `LALT` / `RALT`** | `&kp LALT` / `RALT` | **Alt-Taste** (bzw. `Option ⌥` auf Mac). `RALT` fungiert als **AltGr**. |
-| **`CTRL` / `LCTRL` / `RCTRL`** | `&kp LCTRL` / `RCTRL` | **Steuerungs-Taste** (`Strg` / `Ctrl`). |
+| **`WM`** | `&hm LC(LA(LGUI)) ESCAPE` | Halten: Fenster-Manager-Taste. Antippen: `ESC`. Siehe Abschnitt 3. |
+| **`APP`** | `&kp RGUI` | App-Befehle wie Kopieren und Speichern. Siehe Abschnitt 3. |
+| **`CTRL`** | `&kp RCTRL` | **Steuerungs-Taste** (`Strg` / `Ctrl`). |
+| **`ALT`** | `&kp RALT` | **Alt-Taste** (bzw. `Option ⌥` auf Mac). |
 | **`SHIFT` / `LSHFT` / `RSHFT`** | `&kp LSHFT` / `RSHFT` | **Umschalttaste** für Großbuchstaben. |
 | **`GRAVE` / `` ` ``** | `&kp GRAVE` | Backtick / Gravis (und Tilde `~` mit Shift). |
+| **`-`** | `&kp MINUS` | Minus (und Unterstrich `_` mit Shift), oben rechts. |
 | **`trans` / `▽`** | `&trans` | **Transparent:** Die Taste leitet den Tastendruck an die darunterliegende Ebene (`default`) weiter. |
 | **`none`** | `&none` | **Deaktiviert:** Auf dieser Ebene ohne Funktion (verhindert Fehlbedienung). |
 
@@ -276,5 +287,6 @@ Das Skript generiert die PNG-Dateien im Ordner `img/`:
 - `config/sofle_choc_pro.conf`: Feature- und Energiespar-Konfiguration (Bluetooth, Deep Sleep, etc.).
 - `build.yaml`: GitHub Actions Build-Matrix-Datei.
 - `draw_keymap.sh`: Shell-Skript zur visuellen Keymap-Generierung.
+- `docs/tastenplan.html`: Erklärseite mit Rollen, Ebenen und Hotkeys für Linux und macOS.
 - `img/`: Generierte Keymap-Grafiken.
 
