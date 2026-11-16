@@ -48,11 +48,11 @@
             display-name = "default";
 
             // ------------------------------------------------------------------------------------------------------------
-            // |   `    |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   `   |
+            // |   `    |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   -   |
             // |  TAB   |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
             // | WM/ESC |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
             // | SHIFT  |  Z  |  X  |  C   |  V   |  B   |  MUTE  |  | PLAY  |  N   |  M    |  ,    |  .   |   /   | SHIFT |
-            //                | CTRL| ALT  | APP  | LOWER|  SPACE |  | ENTER | RAISE| APP   | ALT   | CTRL |
+            //                | ALT | CTRL | APP  | LOWER|  SPACE |  | ENTER | RAISE| APP   | CTRL  | ALT  |
             //
             // Each modifier role has its own key code, so the host can map the roles without a remapper.
             // WM/ESC: hold for the window-manager chord LCTRL+LALT+LGUI, tap for ESC.
@@ -62,11 +62,11 @@
             // No other key sends LCTRL, LALT or LGUI. These codes belong to the chord.
 
             bindings = <
-&kp GRAVE     &kp N1  &kp N2     &kp N3    &kp N4    &kp N5                             &kp N6     &kp N7    &kp N8     &kp N9     &kp N0    &kp GRAVE
+&kp GRAVE     &kp N1  &kp N2     &kp N3    &kp N4    &kp N5                             &kp N6     &kp N7    &kp N8     &kp N9     &kp N0    &kp MINUS
 &kp TAB       &kp Q   &kp W      &kp E     &kp R     &kp T      &kp Y                              &kp U     &kp I      &kp O      &kp P     &kp BSPC
 &hm LC(LA(LGUI)) ESCAPE  &kp A   &kp S      &kp D     &kp F     &kp G      &kp H                              &kp J     &kp K      &kp L      &kp SEMI  &kp SQT
 &kp LSHFT     &kp Z   &kp X      &kp C     &kp V     &kp B      &kp C_MUTE  &kp C_PLAY  &kp N      &kp M     &kp COMMA  &kp DOT    &kp FSLH  &kp RSHFT
-                      &kp RCTRL  &kp RALT  &kp RGUI  &mo LOWER  &kp SPACE   &kp ENTER   &mo RAISE  &kp RGUI  &kp RALT   &kp RCTRL
+                      &kp RALT   &kp RCTRL &kp RGUI  &mo LOWER  &kp SPACE   &kp ENTER   &mo RAISE  &kp RGUI  &kp RCTRL  &kp RALT
             >;
 
             sensor-bindings =
@@ -99,17 +99,20 @@
             display-name = "raise";
 
             // ------------------------------------------------------------------------------------------------------------
-            // | BTCLR | BT1  | BT2  |  BT3  |  BT4  |  BT5 |                |      |      |       |      |       |       |
-            // |       | INS  | PSCR | MENU  |       |      |                |      |      |       |      |       |       |
-            // |       | ALT  | CTRL | SHIFT |       | CAPS |                |  <-  |  v   |   ^   |  ->  |  DEL  | BKSPC |
-            // |       | UNDO | CUT  | COPY  | PASTE |      |      |  |      |      |      |       |      |       |       |
+            // |       | BT1  | BT2  |  BT3  |  BT4  |  BT5 |                |      |      |       |      |       |       |
+            // |       | INS  | PSCR | MENU  |       |      |                | HOME | PGDN | PGUP  | END  |       |       |
+            // |       | ALT  | CTRL | SHIFT | APP   | CAPS |                |  <-  |  v   |   ^   |  ->  |  DEL  | BKSPC |
+            // |       |      |      |       |       |      |      |  |      |      |      |       |      |       |       |
+            //
+            // The left home row carries the modifiers, so the left hand adds them to the arrow keys.
+            // BT_CLR is on the adjust layer only, where one stray key press cannot clear a pairing.
             //                |      |       |       |      |      |  |      |      |      |       |      |
 
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                      &trans  &trans    &trans  &trans     &trans   &trans
-&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans          &trans                    &trans    &trans  &trans     &trans   &trans
-&trans      &kp RALT      &kp RCTRL     &kp LSHFT     &trans        &kp CLCK        &kp LEFT                  &kp DOWN  &kp UP  &kp RIGHT  &kp DEL  &kp BSPC
-&trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans          &trans    &trans  &trans  &trans    &trans  &trans     &trans   &trans
+&trans      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                      &trans  &trans    &trans  &trans     &trans   &trans
+&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans          &kp HOME                  &kp PG_DN &kp PG_UP &kp END  &trans   &trans
+&trans      &kp RALT      &kp RCTRL     &kp LSHFT     &kp RGUI      &kp CLCK        &kp LEFT                  &kp DOWN  &kp UP  &kp RIGHT  &kp DEL  &kp BSPC
+&trans      &trans        &trans        &trans        &trans        &trans          &trans    &trans  &trans  &trans    &trans  &trans     &trans   &trans
                           &trans        &trans        &trans        &trans          &trans    &trans  &trans  &trans    &trans  &trans
             >;
 
