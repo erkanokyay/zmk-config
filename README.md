@@ -11,7 +11,7 @@ Die Belegung ist für identische Tasten auf Omarchy (Linux) und macOS gebaut. [`
 1. [Benutzerhandbuch & Schnelleinstieg](#-benutzerhandbuch--schnelleinstieg)
    - [Das Split-Keyboard-Prinzip](#1-das-split-keyboard-prinzip)
    - [Das Ebenen-System (Layer-Konzept)](#2-das-ebenen-system-layer-konzept)
-   - [Dual-Funktionstasten (Mod-Tap / Hold-Tap)](#3-dual-funktionstasten-mod-tap--hold-tap)
+   - [Modifikator-Rollen](#3-modifikator-rollen)
    - [Drehregler (Rotary Encoders)](#4-drehregler-rotary-encoders)
    - [Bluetooth: Kopplung & Profilverwaltung](#5-bluetooth-kopplung--profilverwaltung)
    - [RGB-Beleuchtung & Stromspar-Tipps](#6-rgb-beleuchtung--stromspar-tipps)
